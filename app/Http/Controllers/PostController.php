@@ -12,7 +12,9 @@ class PostController extends Controller
     {
         // $posts = Post::get(); //Laravel Colletion
 
-        $posts = Post::paginate(2);
+        $posts = Post::paginate(20);
+
+        // dd($posts);
 
 
         return view('posts.index', [
