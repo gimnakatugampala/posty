@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['guest']);
+    }
+
     public function index()
     {
         return view('auth.login');
@@ -15,6 +20,8 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->remember);
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required'
@@ -23,7 +30,7 @@ class LoginController extends Controller
         if (!Auth::attempt([
             'email' => $request->email,
             'password' => $request->password
-        ])) {
+        ], $request->remember)) {
             return back()->with('status', 'Invalid login details');
         }
         //if successful login
