@@ -15,7 +15,10 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            // $table->integer('user_id')->unsigned()->index();
+            $table->foreignId('user_id')->constrained();
+            $table->text('body');
+            $table->timestamps(); //create_at and updated at
         });
     }
 
