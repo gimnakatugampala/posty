@@ -10,8 +10,14 @@ class PostController extends Controller
 {
     public function index()
     {
+        // $posts = Post::get(); //Laravel Colletion
 
-        return view('posts.index');
+        $posts = Post::paginate(2);
+
+
+        return view('posts.index', [
+            'posts' => $posts
+        ]);
     }
 
 
@@ -28,6 +34,14 @@ class PostController extends Controller
         //    ]);
 
         // Auth::user()->posts()->create();
-        // $request->user()->posts()->create();
+
+
+        // $request->user()->posts()->create([
+        //     'body' => $request->body
+        // ]);
+
+        $request->user()->posts()->create($request->only('body'));
+
+        return back();
     }
 }
