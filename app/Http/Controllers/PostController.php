@@ -12,13 +12,24 @@ class PostController extends Controller
     {
         // $posts = Post::get(); //Laravel Colletion
 
-        $posts = Post::with('user', 'likes')->paginate(20);
+        $posts = Post::orderBy('created_at', 'desc')->with('user', 'likes')->paginate(20);
+
+        //latest()
+
 
         // dd($posts);
 
 
         return view('posts.index', [
             'posts' => $posts
+        ]);
+    }
+
+    public function show(Post $post)
+    {
+
+        return view('posts.show', [
+            'post' => $post
         ]);
     }
 
@@ -43,6 +54,20 @@ class PostController extends Controller
         ]);
 
         // $request->user()->posts()->create($request->only('body'));
+
+        return back();
+    }
+
+    public function destroy(Post $post)
+    {
+
+        // if (!$post->ownedBy(Auth::user())) {
+        //     dd('no');
+        // }
+
+        $this->authorize('delete', $post);
+
+        $post->delete();
 
         return back();
     }
