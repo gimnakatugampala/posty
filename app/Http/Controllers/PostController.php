@@ -38,11 +38,11 @@ class PostController extends Controller
         // Auth::user()->posts()->create();
 
 
-        // $request->user()->posts()->create([
-        //     'body' => $request->body
-        // ]);
+        $request->user()->posts()->create([
+            'body' => $request->body
+        ]);
 
-        $request->user()->posts()->create($request->only('body'));
+        // $request->user()->posts()->create($request->only('body'));
 
         return back();
     }
