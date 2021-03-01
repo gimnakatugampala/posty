@@ -12,7 +12,7 @@ class PostController extends Controller
     {
         // $posts = Post::get(); //Laravel Colletion
 
-        $posts = Post::paginate(20);
+        $posts = Post::with('user', 'likes')->paginate(20);
 
         // dd($posts);
 
