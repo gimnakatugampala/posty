@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 // use App\Models\User;
+
+use App\Mail\PostLiked;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
@@ -16,6 +19,8 @@ class DashboardController extends Controller
     {
         // dd(Auth::user()->name);
         // dd(Auth::user()->posts);
+
+
         return view('dashboard');
     }
 }
